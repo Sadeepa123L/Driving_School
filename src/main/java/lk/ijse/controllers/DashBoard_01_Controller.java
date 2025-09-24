@@ -17,9 +17,11 @@ public class DashBoard_01_Controller implements Initializable {
     }
 
     public void instructorManagementOnAction(ActionEvent actionEvent) {
+        NavigateTo("/view/InstructorForm.fxml");
     }
 
     public void courseManagementOnAction(ActionEvent actionEvent) {
+        NavigateTo("/view/CourseForm.fxml");
     }
 
     public void lessonSchedulingOnAction(ActionEvent actionEvent) {
