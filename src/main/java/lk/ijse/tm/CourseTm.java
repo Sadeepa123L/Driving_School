@@ -12,4 +12,5 @@ public class CourseTm {
     private String programName;
     private int duration;
     private double fee;
+    private String instructorId;
 }
