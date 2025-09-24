@@ -23,6 +23,9 @@ public class Instructor {
     @Column(nullable = false)
     private String specialization;
 
+    @Column(nullable = false)
+    private String availability;
+
     @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
     private List<Course> courses = new ArrayList<>();
 
@@ -30,10 +33,11 @@ public class Instructor {
     private List<Lesson> lessons = new ArrayList<>();
 
 
-    public Instructor(String instructorId) {
+    public Instructor(String instructorId, String name, String specialization, String availability) {
         this.instructorId = instructorId;
-        this.name = "";
-        this.specialization = "";
+        this.name = name;
+        this.specialization = specialization;
+        this.availability = availability;
         this.courses = new ArrayList<>();
         this.lessons = new ArrayList<>();
     }
