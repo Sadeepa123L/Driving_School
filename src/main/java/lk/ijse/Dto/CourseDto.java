@@ -1,5 +1,6 @@
 package lk.ijse.Dto;
 
+import lk.ijse.entity.Payment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,5 +15,6 @@ public class CourseDto {
     private String programName;
     private int duration;
     private double fee;
-//    private List<Payment> payments;
+    private String instructorId;
+
 }

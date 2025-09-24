@@ -28,6 +28,7 @@ public class Course {
     @Column(nullable = false)
     private double fee;
 
+
     @ManyToMany(mappedBy = "courses")
     private List<Student> students = new ArrayList<>();
 
@@ -45,6 +46,14 @@ public class Course {
         this.duration = duration;
         this.fee = fee;
     }
+    public Course(String programId, String programName, int duration, double fee, Instructor instructor) {
+        this.programId = programId;
+        this.programName = programName;
+        this.duration = duration;
+        this.fee = fee;
+        this.instructor = instructor;
+    }
+
 
 
     public Course(String programId) {
