@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.controllers.MainFormController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="664.0" prefWidth="1050.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controllers.MainFormController">
+   <children>
+      <VBox alignment="CENTER" layoutX="224.0" layoutY="90.0" prefHeight="366.0" prefWidth="518.0" AnchorPane.bottomAnchor="140.8" AnchorPane.leftAnchor="223.60000000000002" AnchorPane.rightAnchor="275.6" AnchorPane.topAnchor="90.0">
+         <children>
+            <ImageView fitHeight="484.0" fitWidth="550.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/driver-license-traffic-rules-road-signs-education-and-drive-lesson-tiny-people-studying-in-driving-school-and-passing-exams-modern-flat-cartoon-style-illustration-on-white-background-vector.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

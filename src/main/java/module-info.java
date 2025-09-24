@@ -6,8 +6,12 @@ module License.School.ORM {
     requires static lombok;
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
+    requires java.naming;
+    requires jbcrypt;
 
     opens lk.ijse.controllers to javafx.fxml;
+    opens lk.ijse.entity to org.hibernate.orm.core;
+
     exports lk.ijse;
     exports lk.ijse.controllers;
 }

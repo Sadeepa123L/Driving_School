@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.controllers.LoginFormController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="fullLoginForm" prefHeight="597.0" prefWidth="1067.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controllers.LoginFormController">
+    <children>
+        <HBox alignment="CENTER" prefHeight="597.0" prefWidth="1067.0" spacing="50.0" style="-fx-background-color: #ffff;">
+            <children>
+                <VBox alignment="CENTER" prefHeight="597.0" prefWidth="450.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+                    <children>
+                        <ImageView fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/driving-school-with-education-process-of-car-training-and-learning-to-drive-to-get-drivers-license-in-flat-cartoon-hand-drawn-templates-illustration-vector.jpg" />
+                            </image>
+                        </ImageView>
+                        <Label style="-fx-text-fill: #333333;" text="Start Your Driving Journey" VBox.vgrow="ALWAYS">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label style="-fx-text-fill: #666666;" text="Get your license with our expert training." textAlignment="CENTER" wrapText="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" prefHeight="597.0" prefWidth="450.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+                    <children>
+                        <Label text="Login">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="inputUserName" onAction="#inputUserNameOnAction" prefHeight="40.0" promptText="User Name" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-radius: 10;" />
+                        <PasswordField fx:id="inputPassword" onAction="#inputPasswordOnAction" prefHeight="40.0" promptText="Password" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-radius: 10;" />
+                        <Button mnemonicParsing="false" onAction="#loginOnAction" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #1976D2; -fx-background-radius: 10;" text="LOGIN" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Button>
+                        <HBox alignment="CENTER" spacing="15.0">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account?" />
+                                <Text fill="#1976D2" onMouseClicked="#goToSignUpOnAction" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" underline="true">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
 </AnchorPane>

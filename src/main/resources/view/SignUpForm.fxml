@@ -1,14 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.controllers.SignUpController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="signUpForm" prefHeight="588.0" prefWidth="972.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controllers.SignUpController">
+    <children>
+        <HBox alignment="CENTER" prefHeight="588.0" prefWidth="972.0" spacing="50.0" style="-fx-background-color: #ffffff;">
+            <children>
+                <VBox alignment="CENTER" prefHeight="588.0" prefWidth="450.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+                    <children>
+                        <ImageView fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/driving-school-with-education-process-of-car-training-and-learning-to-drive-to-get-drivers-license-in-flat-cartoon-hand-drawn-templates-illustration-vector.jpg" />
+                            </image>
+                        </ImageView>
+                        <Label style="-fx-text-fill: #333333;" text="Learn to Drive with Us" VBox.vgrow="ALWAYS">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label style="-fx-text-fill: #666666;" text="Your journey to a driver's license starts here." textAlignment="CENTER" wrapText="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" prefHeight="588.0" prefWidth="471.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+                    <children>
+                        <Label text="Sign Up">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="inputUserName" prefHeight="40.0" promptText="User Name" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-radius: 10;" />
+                        <PasswordField fx:id="inputPassword" prefHeight="40.0" promptText="Password" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-radius: 10;" />
+                        <CheckBox fx:id="adminCheckBox" mnemonicParsing="false" onAction="#adminCheckBoxOnAction" text="Admin">
+                            <font>
+                                <Font name="System Bold Italic" size="14.0" />
+                            </font>
+                        </CheckBox>
+                        <CheckBox fx:id="admissionCheckBox" mnemonicParsing="false" onAction="#ReceptionistCheckBoxOnAction" text="Receptionist">
+                            <font>
+                                <Font name="System Bold Italic" size="14.0" />
+                            </font>
+                        </CheckBox>
+                        <Button mnemonicParsing="false" onAction="#signUpBtnOnAction" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #4CAF50; -fx-background-radius: 10;" text="Sign up" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Button>
+                  <HBox prefHeight="29.0" prefWidth="391.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="25.0" prefWidth="166.0" text="Already have an user account?" textFill="#555555">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button onAction="#btnGoLogin" prefHeight="10.0" prefWidth="79.0" style="-fx-background-color: transparent; -fx-text-fill: #333333; -fx-font-weight: bold; -fx-underline: true;" text="Login Here">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
 </AnchorPane>
