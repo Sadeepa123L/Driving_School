@@ -14,12 +14,15 @@ public class DashBoard_02_Controller implements Initializable {
     public AnchorPane mainContentPane02;
 
     public void studentManagementOnAction(ActionEvent actionEvent) {
+        NavigateTo("/view/StudentForm.fxml");
     }
 
     public void lessonSchedulingOnAction(ActionEvent actionEvent) {
+        NavigateTo("/view/LessonForm.fxml");
     }
 
     public void paymentManagementOnAction(ActionEvent actionEvent) {
+        NavigateTo("/view/PaymentForm.fxml");
     }
 
     public void logoutOnAction(ActionEvent actionEvent) {
