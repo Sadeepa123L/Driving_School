@@ -1,15 +1,14 @@
-package lk.ijse.Dto;
+package lk.ijse.tm;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class LessonDto {
+public class LessonTm {
     private String lessonId;
     private String studentId;
     private String courseId;
