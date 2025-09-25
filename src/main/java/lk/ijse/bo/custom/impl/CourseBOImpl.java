@@ -79,4 +79,9 @@ public class CourseBOImpl implements CourseBO {
         return instructorDAO.getAllIds();
     }
 
+    @Override
+    public List<String> getAllCourseIds() throws Exception {
+        return courseDAO.getAllIds();
+    }
+
 }
