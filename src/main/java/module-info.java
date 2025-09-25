@@ -9,8 +9,12 @@ module License.School.ORM {
     requires java.naming;
     requires jbcrypt;
 
-    opens lk.ijse.controllers to javafx.fxml;
+    opens lk.ijse.configuration to jakarta.persistence;
     opens lk.ijse.entity to org.hibernate.orm.core;
+
+    opens lk.ijse.controllers to javafx.fxml;
+    opens lk.ijse.Dto to javafx.base;
+    opens lk.ijse.tm to javafx.base;
 
     exports lk.ijse;
     exports lk.ijse.controllers;

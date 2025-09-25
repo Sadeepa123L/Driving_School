@@ -75,6 +75,26 @@ public class StudentFormController implements Initializable {
     }
 
     public void btnUpdateStudentOnAction(ActionEvent actionEvent) {
+        String id = lblid.getText();
+        String name = txtName.getText();
+        String address = txtAddress.getText();
+        String contact = txtContact.getText();
+        String regDate = dpRegistrationDate.getValue().toString();
+
+        StudentDto studentDto = new StudentDto(
+                id,
+                name,
+                address,
+                contact,
+                regDate
+        );
+        try{
+            studentBO.updateStudent(studentDto);
+            new Alert(Alert.AlertType.INFORMATION, "Updated", ButtonType.OK).showAndWait();
+            resetPage();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void btnSaveStudentOnAction(ActionEvent actionEvent) {
@@ -116,7 +136,7 @@ public class StudentFormController implements Initializable {
 
             btnDelete.setDisable(false);
             btnUpdate.setDisable(false);
-            resetPage();
+            LoadTableData();
         }
     }
 
@@ -130,7 +150,6 @@ public class StudentFormController implements Initializable {
 
         try {
             resetPage();
-           lblid.setText(studentBO.generateStudentId());
         } catch (Exception e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Something went wrong").show();
@@ -145,7 +164,7 @@ public class StudentFormController implements Initializable {
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
 
-        lblid.setText("");
+        lblid.setText(studentBO.generateStudentId());
         txtName.setText("");
         txtAddress.setText("");
         txtContact.setText("");

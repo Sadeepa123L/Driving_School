@@ -46,7 +46,20 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public boolean update(Student student) throws Exception {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try{
+            session.merge(student);
+            transaction.commit();
+            return true;
+        }catch (Exception e){
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
     }
 
     @Override
@@ -109,7 +122,7 @@ public class StudentDAOImpl implements StudentDAO {
         session.close();
 
         // check if lastId exists and is valid
-        if (lastId != null && lastId.startsWith("I")) {
+        if (lastId != null && lastId.startsWith("S")) {
             try {
                 int newId = Integer.parseInt(lastId.replace("S", "")) + 1;
                 return String.format("S%03d", newId);

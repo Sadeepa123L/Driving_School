@@ -14,6 +14,7 @@ public class DashBoard_01_Controller implements Initializable {
     public AnchorPane mainContentPane;
 
     public void studentManagementOnAction(ActionEvent actionEvent) {
+        NavigateTo("/view/StudentForm.fxml");
     }
 
     public void instructorManagementOnAction(ActionEvent actionEvent) {
