@@ -33,7 +33,7 @@ public class Lesson{
     private Instructor instructor;
 
     @Column(nullable = false)
-    private Timestamp lessonDate;
+    private String lessonDate;
 
     @Column(nullable = false)
     private int duration;
