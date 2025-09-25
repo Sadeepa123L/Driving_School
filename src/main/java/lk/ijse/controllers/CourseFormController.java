@@ -13,6 +13,7 @@ import lk.ijse.bo.custom.InstructorBO;
 import lk.ijse.tm.CourseTm;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CourseFormController implements Initializable {
@@ -90,16 +91,76 @@ public class CourseFormController implements Initializable {
     }
 
     public void onClickTable(MouseEvent mouseEvent) {
-        // implement table click if needed
+        CourseTm selectedItem = ProgramTable.getSelectionModel().getSelectedItem();
+
+        if (selectedItem != null) {
+            lblid.setText(selectedItem.getProgramId());
+            txtName.setText(selectedItem.getProgramName());
+            txtdurtion.setText(String.valueOf(selectedItem.getDuration()));
+            txtfee.setText(String.valueOf(selectedItem.getFee()));
+            cmbInsId.setValue(selectedItem.getInstructorId());
+        }
     }
 
     public void btnResetPageOnAction(ActionEvent actionEvent) {
+        lblid.setText(courseBO.generateProgramId());
+        txtName.clear();
+        txtdurtion.clear();
+        txtfee.clear();
+        cmbInsId.getSelectionModel().clearSelection();
     }
 
     public void btnDeleteProgramOnAction(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure whether you want to delete this student?",
+                ButtonType.YES,
+                ButtonType.NO
+        );
+        alert.setTitle("Delete Course");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.YES) {
+
+            try {
+                boolean isDeleted = courseBO.deleteProgram(lblid.getText());
+                if (isDeleted) {
+                    new Alert(Alert.AlertType.INFORMATION, "Course deleted successfully!").show();
+                    LoadTableData();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Failed to delete the course!").show();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     public void btnUpdateProgramOnAction(ActionEvent actionEvent) {
+        String id = lblid.getText();
+        String newName = txtName.getText();
+        Integer newDuration = Integer.valueOf(txtdurtion.getText());
+        Double newFee = Double.valueOf(txtfee.getText());
+        String instructorId =cmbInsId.getValue().toString();
+
+        CourseDto dto = new CourseDto(
+                id,
+                newName,
+                newDuration,
+                newFee,
+                instructorId
+        );
+        try {
+            boolean isUpdated = courseBO.updateProgram(dto);
+            if (isUpdated) {
+                new Alert(Alert.AlertType.INFORMATION, "Course Updated!").show();
+                LoadTableData();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to update the Course!").show();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void LoadTableData() throws Exception {

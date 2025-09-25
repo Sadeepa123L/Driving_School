@@ -24,7 +24,7 @@ public class CourseBOImpl implements CourseBO {
     }
 
     @Override
-    public void saveProgram(CourseDto courseDto) throws Exception {
+    public boolean saveProgram(CourseDto courseDto) throws Exception {
         Optional<Instructor> instructor = instructorDAO.findById(courseDto.getInstructorId());
         Course course = new Course(
                 courseDto.getProgramId(),    // assign ID before save
@@ -33,7 +33,7 @@ public class CourseBOImpl implements CourseBO {
                 courseDto.getFee(),
                 instructor.get()
         );
-        courseDAO.save(course);
+         return courseDAO.save(course);
     }
 
     @Override
@@ -51,6 +51,32 @@ public class CourseBOImpl implements CourseBO {
             listDto.add(courseDto);
         }
         return listDto;
+    }
+
+    @Override
+    public boolean updateProgram(CourseDto courseDto) throws Exception {
+        Optional<Instructor> instructor = instructorDAO.findById(courseDto.getInstructorId());
+        return courseDAO.update(new Course(
+               courseDto.getProgramId(),
+                courseDto.getProgramName(),
+                courseDto.getDuration(),
+                courseDto.getFee(),
+                instructor.get()
+        ));
+    }
+
+    @Override
+    public boolean deleteProgram(String id) throws Exception {
+        Optional<Course> course = courseDAO.findById(id);
+        if (course.isEmpty()) {
+            throw new Exception("Instructor not Found");
+        }
+        return courseDAO.delete(id);
+    }
+
+    @Override
+    public List<String> getAllInstructorIds() throws Exception {
+        return instructorDAO.getAllIds();
     }
 
 }

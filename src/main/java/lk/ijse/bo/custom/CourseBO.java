@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface CourseBO extends SuperBO {
     String generateProgramId();
-    void saveProgram(CourseDto courseDto) throws Exception;
+    boolean saveProgram(CourseDto courseDto) throws Exception;
     List<CourseDto> getAllCourse() throws Exception;
+      boolean updateProgram(CourseDto courseDto) throws Exception;
+    boolean deleteProgram(String id) throws Exception;
+    List<String> getAllInstructorIds() throws Exception;
 }
