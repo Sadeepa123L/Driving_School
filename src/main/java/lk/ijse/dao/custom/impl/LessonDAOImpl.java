@@ -26,17 +26,52 @@ public class LessonDAOImpl implements LessonDAO {
 
     @Override
     public boolean save(Lesson lesson) throws Exception {
-        return false;
+        lesson.setLessonId(generateNewId());
+        if (lesson.getLessonId() == null || lesson.getLessonDate() == null) {
+            throw new RuntimeException("Program ID is required!");
+        }
+
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        session.save(lesson);
+
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
     public boolean update(Lesson lesson) throws Exception {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(lesson);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
     public boolean delete(String id) throws Exception {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            Lesson lesson = (Lesson) session.get(Lesson.class, id);
+            if (lesson != null) {
+                session.remove(lesson);
+                transaction.commit();
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override
