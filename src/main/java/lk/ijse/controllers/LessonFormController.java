@@ -1,10 +1,15 @@
 package lk.ijse.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.tm.LessonTm;
 
-public class LessonFormController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class LessonFormController implements Initializable {
     public Label lblid;
     public TextField txtLessonDate;
     public TextField txtdurtion;
@@ -17,13 +22,13 @@ public class LessonFormController {
     public Button btnUpdate;
     public Button btnSave;
 
-    public TableView LessonTable;
-    public TableColumn colId;
-    public TableColumn colDate;
-    public TableColumn colduration;
-    public TableColumn colSid;
-    public TableColumn colIid;
-    public TableColumn colCid;
+    public TableView<LessonTm> LessonTable;
+    public TableColumn<LessonTm, String > colId;
+    public TableColumn<LessonTm, String> colDate;
+    public TableColumn<LessonTm, String > colduration;
+    public TableColumn<LessonTm, String > colSid;
+    public TableColumn<LessonTm, String> colIid;
+    public TableColumn<LessonTm, String> colCid;
 
     public void btnResetPageOnAction(ActionEvent actionEvent) {
     }
@@ -38,5 +43,10 @@ public class LessonFormController {
     }
 
     public void onClickTable(MouseEvent mouseEvent) {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }
