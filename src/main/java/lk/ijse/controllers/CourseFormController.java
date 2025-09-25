@@ -70,7 +70,7 @@ public class CourseFormController implements Initializable {
                     instructorId
             );
 
-            System.out.println(dto);
+//            System.out.println(dto);
 
             courseBO.saveProgram(dto);
 
