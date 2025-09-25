@@ -14,5 +14,5 @@ public class StudentDto {
     private String name;
     private String address;
     private String contact;
-    private Date regDate;
+    private String regDate;
 }

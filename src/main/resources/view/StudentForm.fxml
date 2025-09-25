@@ -31,7 +31,7 @@
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                  <TextField fx:id="txtid" />
+                  <Label fx:id="lblid" text="1" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0">

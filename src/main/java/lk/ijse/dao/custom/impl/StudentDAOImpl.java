@@ -17,7 +17,10 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public List<Student> getAll() throws Exception {
-        return List.of();
+        Session session = FactoryConfiguration.getInstance().getSession();
+        List<Student> students = session.createQuery("from Student").list();
+        session.close();
+        return students;
     }
 
     @Override
@@ -71,19 +74,24 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public List<String> getAllIds() throws Exception {
-//        Session session = FactoryConfiguration.getInstance().getSession();
-//        try {
-//            Query<String> query = session.createQuery("SELECT  FROM  i", String.class);
-//            return query.list();
-//        } finally {
-//            session.close();
-//        }
-        return null;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            Query<String> query = session.createQuery("SELECT i.studentId FROM Student i", String.class);
+            return query.list();
+        } finally {
+            session.close();
+        }
     }
 
     @Override
     public Optional<Student> findById(String id) throws Exception {
-        return Optional.empty();
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            Student student = session.get(Student.class, id);
+            return Optional.ofNullable(student);
+        } finally {
+            session.close();
+        }
     }
 
     @Override
@@ -103,15 +111,15 @@ public class StudentDAOImpl implements StudentDAO {
         // check if lastId exists and is valid
         if (lastId != null && lastId.startsWith("I")) {
             try {
-                int newId = Integer.parseInt(lastId.replace("I", "")) + 1;
-                return String.format("I%03d", newId);
+                int newId = Integer.parseInt(lastId.replace("S", "")) + 1;
+                return String.format("S%03d", newId);
             } catch (NumberFormatException e) {
                 // if somehow wrong id exists in DB (like P002), fallback
-                return "I001";
+                return "S001";
             }
         } else {
             // no record yet
-            return "I001";
+            return "S001";
         }
     }
 }

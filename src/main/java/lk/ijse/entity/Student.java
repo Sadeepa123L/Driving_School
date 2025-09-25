@@ -19,9 +19,8 @@ public class Student {
     private String studentId;
     private String name;
     private String address;
-    private Long contact;
-    private Date regDate;
-    private  int someInt;
+    private String contact;
+    private String regDate;
 
     @ManyToMany
     @JoinTable(
@@ -38,13 +37,13 @@ public class Student {
     private List<Lesson> lessons = new ArrayList<>();
 
 
-    public Student(String studentId, String name, String address, Long tel, java.sql.Date registrationDate) {
+    public Student(String studentId, String name, String address, String tel, String registrationDate) {
         this.studentId = studentId;
         this.name = name;
         this.address = address;
         this.contact = tel;
         this.regDate = registrationDate;
-        this.someInt = 0;
+//        this.someInt = 0;
         this.courses = new ArrayList<>();
         this.lessons = new ArrayList<>();
         this.payments = new ArrayList<>();
@@ -53,13 +52,14 @@ public class Student {
 
     public Student(String studentId) {
         this.studentId = studentId;
-        this.name = "";
-        this.address = "";
-        this.contact = 0L;
-        this.regDate = new java.sql.Date(System.currentTimeMillis());
-        this.someInt = 0;
+        this.name = getName();
+        this.address =getAddress();
+        this.contact = getContact();
+        this.regDate = getRegDate();
+//        this.someInt = 0;
         this.courses = new ArrayList<>();
         this.lessons = new ArrayList<>();
         this.payments = new ArrayList<>();
     }
+
 }

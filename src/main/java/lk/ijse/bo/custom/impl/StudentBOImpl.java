@@ -1,5 +1,6 @@
 package lk.ijse.bo.custom.impl;
 
+import lk.ijse.Dto.InstructorDto;
 import lk.ijse.Dto.StudentDto;
 import lk.ijse.bo.custom.StudentBO;
 import lk.ijse.dao.DAOFactory;
@@ -9,6 +10,7 @@ import lk.ijse.entity.Instructor;
 import lk.ijse.entity.Student;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +19,7 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public String generateStudentId() {
-        return "";
+        return studentDAO.generateNewId();
     }
 
     @Override
@@ -34,12 +36,31 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public boolean updateStudent(StudentDto studentDto) throws Exception {
-        return false;
+         return studentDAO.update(new Student(
+               studentDto.getStudentId(),
+                studentDto.getName(),
+                studentDto.getAddress(),
+                studentDto.getContact(),
+                studentDto.getRegDate()
+        ));
+
     }
 
     @Override
     public List<StudentDto> getAllStudent() throws Exception {
-        return List.of();
+        List<Student> list= studentDAO.getAll();
+        List<StudentDto> listDto= new ArrayList<>();
+        for(Student student:list){
+            StudentDto studentDto = new StudentDto(
+                    student.getStudentId(),
+                    student.getName(),
+                    student.getAddress(),
+                    student.getContact(),
+                    student.getRegDate()
+            );
+            listDto.add(studentDto);
+        }
+        return listDto;
     }
 
     @Override
@@ -53,6 +74,6 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public List<String> getAllStudentIds() throws Exception {
-        return List.of();
+        return studentDAO.getAllIds();
     }
 }
