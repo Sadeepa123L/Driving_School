@@ -81,7 +81,13 @@ public class LessonDAOImpl implements LessonDAO {
 
     @Override
     public Optional<Lesson> findById(String id) throws Exception {
-        return Optional.empty();
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            Lesson lesson = session.get(Lesson.class, id);
+            return Optional.ofNullable(lesson);
+        } finally {
+            session.close();
+        }
     }
 
     @Override
