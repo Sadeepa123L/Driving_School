@@ -132,7 +132,7 @@ public class LessonFormController implements Initializable {
             loadTableData();
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, "Failed to save the Lesson!").show();
         }
     }
 
