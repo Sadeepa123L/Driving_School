@@ -85,6 +85,7 @@
                 <HBox alignment="CENTER" spacing="20.0">
                     <children>
                         <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnResetPageOnAction" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #95a5a6; -fx-background-radius: 10; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="Reset" />
+                  <Button mnemonicParsing="false" onAction="#btnUpdatePaymentOnAction" prefHeight="40.0" prefWidth="120.0" style="-fx-background-radius: 10; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #3498db;" text="Button" />
                         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSavePaymentOnAction" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #2ecc71; -fx-background-radius: 10; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" text="Save" />
                     </children>
                 </HBox>
