@@ -20,8 +20,8 @@ public class PaymentFormController implements Initializable {
     public Label lblId;
     public TextField txtpaymentdate;
     public TextField txtAmount;
-    public ComboBox cmbStudentId;
-    public ComboBox cmbCourseId;
+    public ComboBox<String> cmbStudentId;
+    public ComboBox<String> cmbCourseId;
     public TextField txtStatus;
 
     public Button btnReset;
@@ -40,6 +40,36 @@ public class PaymentFormController implements Initializable {
     private final CourseBO courseBO =(CourseBO) BOFactory.getBO(BOFactory.BOType.COURSE);
 
 
+    private boolean validateInputs() {
+        if (txtpaymentdate.getText().isEmpty() ||
+                txtAmount.getText().isEmpty() ||
+                txtStatus.getText().isEmpty() ||
+                cmbStudentId.getValue() == null ||
+                cmbCourseId.getValue() == null) {
+            new Alert(Alert.AlertType.WARNING, "All fields are required!").show();
+            return false;
+        }
+
+        try {
+            double amount = Double.parseDouble(txtAmount.getText());
+            if (amount <= 0) {
+                new Alert(Alert.AlertType.WARNING, "Amount must be greater than 0!").show();
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.WARNING, "Invalid amount! Please enter a valid number.").show();
+            return false;
+        }
+
+        String status = txtStatus.getText().trim().toUpperCase();
+        if (!(status.equals("PAID") || status.equals("UNPAID"))) {
+            new Alert(Alert.AlertType.WARNING, "Status must be either 'PAID' or 'UNPAID'.").show();
+            return false;
+        }
+
+        return true;
+    }
+
     public void btnResetPageOnAction(ActionEvent actionEvent) throws Exception {
         lblId.setText(paymentBO.generateNewId());
         txtpaymentdate.clear();
@@ -50,14 +80,16 @@ public class PaymentFormController implements Initializable {
     }
 
     public void btnSavePaymentOnAction(ActionEvent actionEvent) {
+        if (!validateInputs()) return;
+
         try{
             String newId = paymentBO.generateNewId();
             lblId.setText(newId);
-            String studentId = cmbStudentId.getValue().toString();
-            String courseId = cmbCourseId.getValue().toString();
+            String studentId = cmbStudentId.getValue();
+            String courseId = cmbCourseId.getValue();
             String paymentDate = txtpaymentdate.getText();
             Double amount = Double.valueOf(txtAmount.getText());
-            String status = txtStatus.getText();
+            String status = txtStatus.getText().toUpperCase();
 
             PaymentDto paymentDto = new PaymentDto(
                     newId,
@@ -69,11 +101,12 @@ public class PaymentFormController implements Initializable {
             );
 
             paymentBO.savePayment(paymentDto);
-            new Alert(Alert.AlertType.INFORMATION, "Lesson Saved!").show();
+            new Alert(Alert.AlertType.INFORMATION, "Payment Saved!").show();
             loadAllPayments();
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Failed to save the Lesson!").show();
+            new Alert(Alert.AlertType.ERROR, "Failed to save the Payment!").show();
+            e.printStackTrace();
         }
     }
 
@@ -81,7 +114,6 @@ public class PaymentFormController implements Initializable {
         PaymentTm selected = PaymentTable.getSelectionModel().getSelectedItem();
 
         if (selected != null) {
-            // set values to form fields
             lblId.setText(selected.getPaymentId());
             txtpaymentdate.setText(selected.getPaymentDate());
             txtAmount.setText(String.valueOf(selected.getAmount()));
@@ -118,19 +150,21 @@ public class PaymentFormController implements Initializable {
                                 paymentDto.getStudentId(),
                                 paymentDto.getProgramId(),
                                 paymentDto.getAmount(),
-                                paymentDto.getProgramId(),
+                                paymentDto.getPaymentDate(),
                                 paymentDto.getStatus()
                         )).toList()
         ));
     }
 
     public void btnUpdatePaymentOnAction(ActionEvent actionEvent) {
+        if (!validateInputs()) return;
+
         String id = lblId.getText();
-        String studentId = cmbStudentId.getValue().toString();
-        String courseId = cmbCourseId.getValue().toString();
+        String studentId = cmbStudentId.getValue();
+        String courseId = cmbCourseId.getValue();
         String paymentDate = txtpaymentdate.getText();
         Double amount = Double.valueOf(txtAmount.getText());
-        String status = txtStatus.getText();
+        String status = txtStatus.getText().toUpperCase();
 
         PaymentDto paymentDto = new PaymentDto(
                 id,
@@ -143,10 +177,10 @@ public class PaymentFormController implements Initializable {
         try {
             boolean isUpdated = paymentBO.updatePayment(paymentDto);
             if (isUpdated) {
-                new Alert(Alert.AlertType.INFORMATION, "Instructor Updated!").show();
+                new Alert(Alert.AlertType.INFORMATION, "Payment Updated!").show();
                 loadAllPayments();
             } else {
-                new Alert(Alert.AlertType.ERROR, "Failed to update the Instructor!").show();
+                new Alert(Alert.AlertType.ERROR, "Failed to update the Payment!").show();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

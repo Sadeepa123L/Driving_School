@@ -61,9 +61,9 @@ public class LoginFormController {
             String fxmlFile;
 
             if ("Admin".equalsIgnoreCase(role)) {
-                fxmlFile = "/view/DashBoard_01_Form.fxml";  // Admin → mainForm
+                fxmlFile = "/view/DashBoard_01_Form.fxml";
             } else if ("Admissions Coordinator".equalsIgnoreCase(role)) {
-                fxmlFile = "/view/DashBoard_02_Form.fxml"; // Coordinator → mainForm2
+                fxmlFile = "/view/DashBoard_02_Form.fxml";
             } else {
                 new Alert(Alert.AlertType.ERROR, "Unknown role: " + role).show();
                 return;

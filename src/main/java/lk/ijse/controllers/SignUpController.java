@@ -7,9 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import lk.ijse.Dto.UserDto;
 import lk.ijse.bo.BOFactory;
 import lk.ijse.bo.custom.SignUpBO;
@@ -29,7 +27,7 @@ public class SignUpController {
     SignUpBO signUpBO = (SignUpBO) BOFactory.getBO(BOFactory.BOType.SIGNUP);
 
     public void signUpBtnOnAction(ActionEvent actionEvent) {
-        if (isValied()){
+        if (isValid()) {
             UserDto userdto = new UserDto();
             userdto.setUserName(inputUserName.getText().trim());
             userdto.setPassword(Password.hashPassword(inputPassword.getText().trim()));
@@ -42,26 +40,62 @@ public class SignUpController {
 
             try {
                 signUpBO.signUp(userdto);
+                new Alert(Alert.AlertType.INFORMATION, "Account created successfully!").show();
+                loadLoginPage();
             } catch (UserAlreadyExistsException e) {
                 ExceptionHandler.handleException(e);
-            }
-            try {
-                loadLoginPage();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
-            inputUserName.clear();
-            inputPassword.clear();
-            adminCheckBox.setSelected(false);
-            admissionCheckBox.setSelected(false);
-        } else {
-            new Alert(Alert.AlertType.WARNING,"Please Enter All Fields !!").show();
+            resetForm();
         }
     }
 
-    private boolean isValied() {
-        return inputUserName.getText().trim().length() > 0 && inputPassword.getText().trim().length() > 0;
+    private boolean isValid() {
+        String username = inputUserName.getText().trim();
+        String password = inputPassword.getText().trim();
+
+        // Username validation
+        if (username.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Username cannot be empty!").show();
+            return false;
+        }
+        if (username.length() < 4) {
+            new Alert(Alert.AlertType.WARNING, "Username must be at least 4 characters long!").show();
+            return false;
+        }
+        if (username.contains(" ")) {
+            new Alert(Alert.AlertType.WARNING, "Username cannot contain spaces!").show();
+            return false;
+        }
+
+        if (password.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Password cannot be empty!").show();
+            return false;
+        }
+        if (password.length() < 6) {
+            new Alert(Alert.AlertType.WARNING, "Password must be at least 6 characters long!").show();
+            return false;
+        }
+        if (!password.matches(".*[A-Za-z].*") || !password.matches(".*\\d.*")) {
+            new Alert(Alert.AlertType.WARNING, "Password must contain at least one letter and one number!").show();
+            return false;
+        }
+
+        if (!adminCheckBox.isSelected() && !admissionCheckBox.isSelected()) {
+            new Alert(Alert.AlertType.WARNING, "Please select a role (Admin or Admissions Coordinator)!").show();
+            return false;
+        }
+
+        return true;
+    }
+
+    private void resetForm() {
+        inputUserName.clear();
+        inputPassword.clear();
+        adminCheckBox.setSelected(false);
+        admissionCheckBox.setSelected(false);
     }
 
     public void inputUserNameOnAction(ActionEvent actionEvent) {
@@ -81,6 +115,7 @@ public class SignUpController {
     public void btnGoLogin(ActionEvent actionEvent) throws IOException {
         loadLoginPage();
     }
+
     private void loadLoginPage() throws IOException {
         signUpForm.getChildren().clear();
         AnchorPane load = FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"));
@@ -88,5 +123,4 @@ public class SignUpController {
         load.prefHeightProperty().bind(signUpForm.heightProperty());
         signUpForm.getChildren().add(load);
     }
-
 }

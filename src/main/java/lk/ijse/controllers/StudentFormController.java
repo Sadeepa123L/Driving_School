@@ -18,7 +18,6 @@ import java.util.ResourceBundle;
 
 public class StudentFormController implements Initializable {
 
-
     public TextField txtName;
     public TextField txtAddress;
     public TextField txtContact;
@@ -39,101 +38,6 @@ public class StudentFormController implements Initializable {
 
     StudentBO studentBO =(StudentBO) BOFactory.getBO(BOFactory.BOType.STUDENT);
 
-    public void btnResetPageOnAction(ActionEvent actionEvent) throws Exception {
-        resetPage();
-    }
-
-    public void btnDeleteStudentOnAction(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                "Are you sure whether you want to delete this student?",
-                ButtonType.YES,
-                ButtonType.NO
-        );
-        alert.setTitle("Delete Student");
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.isPresent() && result.get() == ButtonType.YES) {
-
-            try {
-                boolean isDeleted = studentBO.deleteStudent(lblid.getText());
-                if (isDeleted) {
-                    new Alert(Alert.AlertType.INFORMATION, "Instructor deleted successfully!").show();
-
-                } else {
-                    new Alert(Alert.AlertType.ERROR, "Failed to delete the instructor!").show();
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    public void btnUpdateStudentOnAction(ActionEvent actionEvent) {
-        String id = lblid.getText();
-        String name = txtName.getText();
-        String address = txtAddress.getText();
-        String contact = txtContact.getText();
-        String regDate = dpRegistrationDate.getValue().toString();
-
-        StudentDto studentDto = new StudentDto(
-                id,
-                name,
-                address,
-                contact,
-                regDate
-        );
-        try{
-            studentBO.updateStudent(studentDto);
-            new Alert(Alert.AlertType.INFORMATION, "Updated", ButtonType.OK).showAndWait();
-            resetPage();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void btnSaveStudentOnAction(ActionEvent actionEvent) {
-        try {
-            String newId = studentBO.generateStudentId();
-            lblid.setText(newId);
-            String newName = txtName.getText();
-            String newAddress = txtAddress.getText();
-            String newContact = txtContact.getText();
-            String newDate = dpRegistrationDate.getValue().toString();
-
-            StudentDto studentDto = new StudentDto(
-                    newId,
-                    newName,
-                    newAddress,
-                    newContact,
-                    newDate
-            );
-            studentBO.saveStudent(studentDto);
-            new Alert(Alert.AlertType.INFORMATION, "Saved", ButtonType.OK).showAndWait();
-
-             resetPage();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void onClickTable(MouseEvent mouseEvent) throws Exception {
-        StudentTm selected = studentTable.getSelectionModel().getSelectedItem();
-
-        if (selected != null) {
-            // set values to form fields
-            lblid.setText(selected.getStudentId());
-            txtName.setText(selected.getName());
-            txtAddress.setText(selected.getAddress());
-            txtContact.setText(selected.getContact());
-            dpRegistrationDate.setValue(LocalDate.parse(selected.getRegDate()));
-
-            btnDelete.setDisable(false);
-            btnUpdate.setDisable(false);
-            LoadTableData();
-        }
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colId.setCellValueFactory(new PropertyValueFactory<>("studentId"));
@@ -149,32 +53,143 @@ public class StudentFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Something went wrong").show();
         }
     }
-    private void resetPage() throws Exception {
 
-        LoadTableData();
+    private void resetPage() throws Exception {
+        loadTableData();
 
         btnSave.setDisable(false);
-
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
 
         lblid.setText(studentBO.generateStudentId());
-        txtName.setText("");
-        txtAddress.setText("");
-        txtContact.setText("");
+        txtName.clear();
+        txtAddress.clear();
+        txtContact.clear();
         dpRegistrationDate.setValue(null);
     }
 
-    private void LoadTableData() throws Exception {
+    private void loadTableData() throws Exception {
         studentTable.setItems(FXCollections.observableList(
                 studentBO.getAllStudent().stream().map(studentDto ->
                         new StudentTm(
-                               studentDto.getStudentId(),
+                                studentDto.getStudentId(),
                                 studentDto.getName(),
                                 studentDto.getAddress(),
                                 studentDto.getContact(),
                                 studentDto.getRegDate()
                         )).toList()
         ));
+    }
+
+    public void btnResetPageOnAction(ActionEvent actionEvent) throws Exception {
+        resetPage();
+    }
+
+    public void btnDeleteStudentOnAction(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure whether you want to delete this student?",
+                ButtonType.YES,
+                ButtonType.NO
+        );
+        alert.setTitle("Delete Student");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.YES) {
+            try {
+                boolean isDeleted = studentBO.deleteStudent(lblid.getText());
+                if (isDeleted) {
+                    new Alert(Alert.AlertType.INFORMATION, "Student deleted successfully!").show();
+                    resetPage();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Failed to delete the student!").show();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void btnSaveStudentOnAction(ActionEvent actionEvent) {
+        if (!validateInputs()) return;
+
+        try {
+            String newId = studentBO.generateStudentId();
+            lblid.setText(newId);
+
+            StudentDto studentDto = new StudentDto(
+                    newId,
+                    txtName.getText().trim(),
+                    txtAddress.getText().trim(),
+                    txtContact.getText().trim(),
+                    dpRegistrationDate.getValue().toString()
+            );
+            studentBO.saveStudent(studentDto);
+            new Alert(Alert.AlertType.INFORMATION, "Saved", ButtonType.OK).showAndWait();
+            resetPage();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void btnUpdateStudentOnAction(ActionEvent actionEvent) {
+        if (!validateInputs()) return;
+
+        try {
+            StudentDto studentDto = new StudentDto(
+                    lblid.getText(),
+                    txtName.getText().trim(),
+                    txtAddress.getText().trim(),
+                    txtContact.getText().trim(),
+                    dpRegistrationDate.getValue().toString()
+            );
+            studentBO.updateStudent(studentDto);
+            new Alert(Alert.AlertType.INFORMATION, "Updated", ButtonType.OK).showAndWait();
+            resetPage();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void onClickTable(MouseEvent mouseEvent) throws Exception {
+        StudentTm selected = studentTable.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            lblid.setText(selected.getStudentId());
+            txtName.setText(selected.getName());
+            txtAddress.setText(selected.getAddress());
+            txtContact.setText(selected.getContact());
+            dpRegistrationDate.setValue(LocalDate.parse(selected.getRegDate()));
+
+            btnDelete.setDisable(false);
+            btnUpdate.setDisable(false);
+        }
+    }
+
+    private boolean validateInputs() {
+        String name = txtName.getText().trim();
+        String address = txtAddress.getText().trim();
+        String contact = txtContact.getText().trim();
+        LocalDate regDate = dpRegistrationDate.getValue();
+
+        if (name.isEmpty() || address.isEmpty() || contact.isEmpty() || regDate == null) {
+            new Alert(Alert.AlertType.WARNING, "All fields are required!").show();
+            return false;
+        }
+
+        if (!name.matches("[A-Za-z ]+")) {
+            new Alert(Alert.AlertType.WARNING, "Name can only contain letters and spaces!").show();
+            return false;
+        }
+
+        if (!contact.matches("\\d{10}")) {
+            new Alert(Alert.AlertType.WARNING, "Contact must be 10 digits!").show();
+            return false;
+        }
+
+        if (regDate.isAfter(LocalDate.now())) {
+            new Alert(Alert.AlertType.WARNING, "Registration date cannot be in the future!").show();
+            return false;
+        }
+
+        return true;
     }
 }
