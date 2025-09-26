@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserDAO extends SuperDAO {
     void save(User user) throws UserAlreadyExistsException;
-    void update(User user);
+    boolean update(User user);
     void delete(User user);
     User getUser(String userName);
     List<User> getAllUsers();

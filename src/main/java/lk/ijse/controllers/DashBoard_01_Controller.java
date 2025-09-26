@@ -34,6 +34,7 @@ public class DashBoard_01_Controller implements Initializable {
     }
 
     public void usersManagementOnAction(ActionEvent actionEvent) {
+        NavigateTo("/view/UserForm.fxml");
     }
 
     public void logoutOnAction(ActionEvent actionEvent) {

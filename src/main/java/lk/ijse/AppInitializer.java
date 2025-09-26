@@ -18,7 +18,7 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage primarystage) throws Exception {
-        Parent parent = FXMLLoader.load(getClass().getResource("/view/StartForm.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/DashBoard_01_Form.fxml"));
         Scene scene = new Scene(parent);
         primarystage.setScene(scene);
         primarystage.setTitle("Life Fitness Gym");

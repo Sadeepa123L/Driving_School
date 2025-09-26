@@ -15,9 +15,9 @@
 
 <AnchorPane fx:id="signUpForm" prefHeight="588.0" prefWidth="972.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controllers.SignUpController">
     <children>
-        <HBox alignment="CENTER" prefHeight="588.0" prefWidth="972.0" spacing="50.0" style="-fx-background-color: #ffffff;">
+        <HBox alignment="CENTER" prefHeight="588.0" prefWidth="972.0" spacing="50.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <VBox alignment="CENTER" prefHeight="588.0" prefWidth="450.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+                <VBox alignment="CENTER" prefHeight="588.0" prefWidth="450.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;" HBox.hgrow="ALWAYS">
                     <children>
                         <ImageView fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -39,15 +39,15 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                     </padding>
                 </VBox>
-                <VBox alignment="CENTER_LEFT" prefHeight="588.0" prefWidth="471.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+                <VBox alignment="CENTER_LEFT" prefHeight="588.0" prefWidth="471.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;" HBox.hgrow="ALWAYS">
                     <children>
                         <Label text="Sign Up">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="inputUserName" prefHeight="40.0" promptText="User Name" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-radius: 10;" />
-                        <PasswordField fx:id="inputPassword" prefHeight="40.0" promptText="Password" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-radius: 10;" />
+                        <TextField fx:id="inputUserName" prefHeight="40.0" promptText="User Name" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-radius: 10;" VBox.vgrow="ALWAYS" />
+                        <PasswordField fx:id="inputPassword" prefHeight="40.0" promptText="Password" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-radius: 10;" VBox.vgrow="ALWAYS" />
                         <CheckBox fx:id="adminCheckBox" mnemonicParsing="false" onAction="#adminCheckBoxOnAction" text="Admin">
                             <font>
                                 <Font name="System Bold Italic" size="14.0" />

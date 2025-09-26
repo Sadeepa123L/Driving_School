@@ -15,9 +15,9 @@
 
 <AnchorPane fx:id="fullLoginForm" prefHeight="597.0" prefWidth="1067.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controllers.LoginFormController">
     <children>
-        <HBox alignment="CENTER" prefHeight="597.0" prefWidth="1067.0" spacing="50.0" style="-fx-background-color: #ffff;">
+        <HBox alignment="CENTER" prefHeight="597.0" prefWidth="1067.0" spacing="50.0" style="-fx-background-color: #ffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <VBox alignment="CENTER" prefHeight="597.0" prefWidth="450.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+                <VBox alignment="CENTER" prefHeight="597.0" prefWidth="450.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;" HBox.hgrow="ALWAYS">
                     <children>
                         <ImageView fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -39,15 +39,15 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                     </padding>
                 </VBox>
-                <VBox alignment="CENTER_LEFT" prefHeight="597.0" prefWidth="450.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;">
+                <VBox alignment="CENTER_LEFT" prefHeight="597.0" prefWidth="450.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20;" HBox.hgrow="ALWAYS">
                     <children>
                         <Label text="Login">
                             <font>
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="inputUserName" onAction="#inputUserNameOnAction" prefHeight="40.0" promptText="User Name" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-radius: 10;" />
-                        <PasswordField fx:id="inputPassword" onAction="#inputPasswordOnAction" prefHeight="40.0" promptText="Password" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-radius: 10;" />
+                        <TextField fx:id="inputUserName" onAction="#inputUserNameOnAction" prefHeight="40.0" promptText="User Name" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-radius: 10;" VBox.vgrow="ALWAYS" />
+                        <PasswordField fx:id="inputPassword" onAction="#inputPasswordOnAction" prefHeight="40.0" promptText="Password" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-border-radius: 10;" VBox.vgrow="ALWAYS" />
                         <Button mnemonicParsing="false" onAction="#loginOnAction" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #1976D2; -fx-background-radius: 10;" text="LOGIN" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="16.0" />

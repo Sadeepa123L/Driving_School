@@ -27,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void update(User user) {
+    public boolean update(User user) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -35,6 +35,7 @@ public class UserDAOImpl implements UserDAO {
 
         transaction.commit();
         session.close();
+        return false;
     }
 
     @Override
