@@ -40,7 +40,7 @@
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="txtName" promptText="Enter student's name" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="txtName" promptText="Enter instructor name" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0">
@@ -50,7 +50,7 @@
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="txtspecialization" promptText="Enter address" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="txtspecialization" promptText="Enter specialization" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0">
@@ -60,7 +60,7 @@
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="txtavailability" promptText="Enter contact number" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="txtavailability" promptText="availability" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0" />

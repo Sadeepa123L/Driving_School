@@ -61,7 +61,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtStatus" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="txtStatus" promptText="half/full" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
                 <HBox prefHeight="51.0" prefWidth="1154.0" spacing="20.0">

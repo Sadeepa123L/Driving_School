@@ -41,17 +41,17 @@
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="txtName" promptText="Enter student's name" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="txtName" promptText="Enter Course name" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0">
                     <children>
-                        <Label prefHeight="22.0" prefWidth="80.0" text="duration">
+                        <Label prefHeight="22.0" prefWidth="104.0" text="duration(hour)">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="txtdurtion" promptText="Enter address" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="txtdurtion" opacity="0.33" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" text="hour" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0">
@@ -61,7 +61,7 @@
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="txtfee" promptText="Enter contact number" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="txtfee" promptText="Enter Fee" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" />

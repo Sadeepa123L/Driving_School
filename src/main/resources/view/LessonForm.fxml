@@ -41,7 +41,7 @@
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="txtLessonDate" promptText="Enter student's name" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="txtLessonDate" promptText="YYYY/MM/DD" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0">
@@ -51,7 +51,7 @@
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="txtdurtion" promptText="Enter address" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="txtdurtion" style="-fx-background-radius: 10; -fx-background-color: #f5f8fa; -fx-border-color: #d0d0d0; -fx-border-radius: 10; -fx-padding: 8px 12px;" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
                 <HBox prefHeight="26.0" prefWidth="991.0" spacing="20.0">
