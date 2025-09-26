@@ -6,14 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import lk.ijse.Dto.LessonDto;
 import lk.ijse.Dto.PaymentDto;
 import lk.ijse.bo.BOFactory;
 import lk.ijse.bo.custom.CourseBO;
 import lk.ijse.bo.custom.PaymentBO;
 import lk.ijse.bo.custom.StudentBO;
-import lk.ijse.tm.LessonTm;
-import lk.ijse.tm.PaymentTm;
+import lk.ijse.Dto.tm.PaymentTm;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,7 +40,13 @@ public class PaymentFormController implements Initializable {
     private final CourseBO courseBO =(CourseBO) BOFactory.getBO(BOFactory.BOType.COURSE);
 
 
-    public void btnResetPageOnAction(ActionEvent actionEvent) {
+    public void btnResetPageOnAction(ActionEvent actionEvent) throws Exception {
+        lblId.setText(paymentBO.generateNewId());
+        txtpaymentdate.clear();
+        txtAmount.clear();
+        txtStatus.clear();
+        cmbStudentId.getSelectionModel().clearSelection();
+        cmbCourseId.getSelectionModel().clearSelection();
     }
 
     public void btnSavePaymentOnAction(ActionEvent actionEvent) {
@@ -64,7 +68,7 @@ public class PaymentFormController implements Initializable {
                     status
             );
 
-            paymentBO.saveLesson(paymentDto);
+            paymentBO.savePayment(paymentDto);
             new Alert(Alert.AlertType.INFORMATION, "Lesson Saved!").show();
             loadAllPayments();
 
@@ -74,6 +78,17 @@ public class PaymentFormController implements Initializable {
     }
 
     public void onClickTable(MouseEvent mouseEvent) {
+        PaymentTm selected = PaymentTable.getSelectionModel().getSelectedItem();
+
+        if (selected != null) {
+            // set values to form fields
+            lblId.setText(selected.getPaymentId());
+            txtpaymentdate.setText(selected.getPaymentDate());
+            txtAmount.setText(String.valueOf(selected.getAmount()));
+            txtStatus.setText(selected.getStatus());
+            cmbStudentId.setValue(selected.getStudentId());
+            cmbCourseId.setValue(selected.getProgramId());
+        }
     }
 
     @Override
@@ -96,15 +111,45 @@ public class PaymentFormController implements Initializable {
     }
 
     private void loadAllPayments() throws Exception {
-        PaymentTable.setItems(FXCollections.observableArrayList(
-                paymentBO.getAllPayments().stream().map(paymentDto -> new PaymentTm(
-                       paymentDto.getPaymentId(),
-                        paymentDto.getStudentId(),
-                        paymentDto.getProgramId(),
-                        paymentDto.getAmount(),
-                        paymentDto.getPaymentDate(),
-                        paymentDto.getStatus()
-                )).toList()
+        PaymentTable.setItems(FXCollections.observableList(
+                paymentBO.getAllPayments().stream().map(paymentDto ->
+                        new PaymentTm(
+                                paymentDto.getPaymentId(),
+                                paymentDto.getStudentId(),
+                                paymentDto.getProgramId(),
+                                paymentDto.getAmount(),
+                                paymentDto.getProgramId(),
+                                paymentDto.getStatus()
+                        )).toList()
         ));
+    }
+
+    public void btnUpdatePaymentOnAction(ActionEvent actionEvent) {
+        String id = lblId.getText();
+        String studentId = cmbStudentId.getValue().toString();
+        String courseId = cmbCourseId.getValue().toString();
+        String paymentDate = txtpaymentdate.getText();
+        Double amount = Double.valueOf(txtAmount.getText());
+        String status = txtStatus.getText();
+
+        PaymentDto paymentDto = new PaymentDto(
+                id,
+                studentId,
+                courseId,
+                amount,
+                paymentDate,
+                status
+        );
+        try {
+            boolean isUpdated = paymentBO.updatePayment(paymentDto);
+            if (isUpdated) {
+                new Alert(Alert.AlertType.INFORMATION, "Instructor Updated!").show();
+                loadAllPayments();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to update the Instructor!").show();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
