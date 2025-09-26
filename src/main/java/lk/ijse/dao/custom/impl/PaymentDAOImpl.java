@@ -54,4 +54,14 @@ public class PaymentDAOImpl implements PaymentDAO {
         session.close();
         return true;
     }
+
+    @Override
+    public boolean updatePayment(Payment payment) throws Exception {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(payment);
+        transaction.commit();
+        session.close();
+        return true;
+    }
 }
