@@ -14,7 +14,7 @@ module License.School.ORM {
 
     opens lk.ijse.controllers to javafx.fxml;
     opens lk.ijse.Dto to javafx.base;
-    opens lk.ijse.tm to javafx.base;
+    opens lk.ijse.Dto.tm to javafx.base;
 
     exports lk.ijse;
     exports lk.ijse.controllers;

@@ -12,7 +12,7 @@ import lk.ijse.bo.custom.CourseBO;
 import lk.ijse.bo.custom.InstructorBO;
 import lk.ijse.bo.custom.LessonBO;
 import lk.ijse.bo.custom.StudentBO;
-import lk.ijse.tm.LessonTm;
+import lk.ijse.Dto.tm.LessonTm;
 
 import java.net.URL;
 import java.util.Optional;

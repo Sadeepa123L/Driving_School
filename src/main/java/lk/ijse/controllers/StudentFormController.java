@@ -5,20 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import lk.ijse.Dto.StudentDto;
 import lk.ijse.bo.BOFactory;
 import lk.ijse.bo.custom.StudentBO;
-import lk.ijse.exception.DuplicateException;
-import lk.ijse.tm.InstructorTm;
-import lk.ijse.tm.StudentTm;
+import lk.ijse.Dto.tm.StudentTm;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
