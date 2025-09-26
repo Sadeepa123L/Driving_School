@@ -32,7 +32,7 @@ public class PaymentBOImpl implements PaymentBO {
     }
 
     @Override
-    public boolean saveLesson(PaymentDto paymentDto) throws Exception {
+    public boolean savePayment(PaymentDto paymentDto) throws Exception {
         Optional<Student> student = studentDAO.findById(paymentDto.getStudentId());
         Optional<Course> course = courseDAO.findById(paymentDto.getProgramId());
         Payment payment = new Payment(
@@ -44,6 +44,21 @@ public class PaymentBOImpl implements PaymentBO {
                          course.get()
                 );
         return paymentDAO.savePayment(payment);
+    }
+
+    @Override
+    public boolean updatePayment(PaymentDto paymentDto) throws Exception {
+        Optional<Student> student = studentDAO.findById(paymentDto.getStudentId());
+        Optional<Course> course = courseDAO.findById(paymentDto.getProgramId());
+        Payment payment = new Payment(
+                paymentDto.getPaymentId(),
+                student.get(),
+                paymentDto.getAmount(),
+                paymentDto.getPaymentDate(),
+                paymentDto.getStatus(),
+                course.get()
+        );
+        return paymentDAO.updatePayment(payment);
     }
 
     @Override
